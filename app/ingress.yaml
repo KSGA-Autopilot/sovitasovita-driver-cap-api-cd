@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sovitasovita-driver-cap-api-ingress
+  namespace: sovitasovita
+spec:
+  tls:
+    - hosts:
+        - demo.autopilot.dev
+      secretName: demo-autopilot-dev-cert
+  rules:
+    - host: demo.autopilot.dev
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: sovitasovita-driver-cap-api-svc
+                port:
+                  number: 8080
